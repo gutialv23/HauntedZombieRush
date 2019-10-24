@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockMovement : MonoBehaviour
+public class RockMovement : PlatformMovement
 {
-    [ SerializeField ] private float    topPosition =  1.0f;
-    [ SerializeField ] private float bottomPosition = -1.0f;
-    [ SerializeField ] private float speed          =  1.0f;
-    [ SerializeField ] private float waitTime       =  0.5f;
+    [ SerializeField ] private float    topPosY =  1.0f;
+    [ SerializeField ] private float bottomPosY = -1.0f;
+    [ SerializeField ] private float speedY     =  1.0f;
+    [ SerializeField ] private float waitTime   =  0.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    void Start()  // Called before the first frame update.
     {
         StartCoroutine( MoveUpDown() );
+    }
+
+    protected override void Update()  // Called once per frame.
+    {
+        base.Update();
     }
 
     IEnumerator MoveUpDown()
@@ -21,12 +25,12 @@ public class RockMovement : MonoBehaviour
 
         while ( true )
         {
-            transform.localPosition += ( direction * Time.deltaTime * speed );
+            transform.localPosition += ( direction * Time.deltaTime * speedY );
 
             bool wait = false;
 
-                 if ( ( transform.localPosition.y < bottomPosition ) && ( direction != Vector3.up   ) ) { direction = Vector3.up;   wait = true; }
-            else if ( ( transform.localPosition.y >    topPosition ) && ( direction != Vector3.down ) ) { direction = Vector3.down; wait = true; }
+                 if ( ( transform.localPosition.y < bottomPosY ) && ( direction != Vector3.up   ) ) { direction = Vector3.up;   wait = true; }
+            else if ( ( transform.localPosition.y >    topPosY ) && ( direction != Vector3.down ) ) { direction = Vector3.down; wait = true; }
 
             yield return ( ( wait ) ? new WaitForSeconds( waitTime ) : null );
         }

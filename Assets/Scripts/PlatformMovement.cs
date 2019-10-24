@@ -2,27 +2,17 @@
 
 public class PlatformMovement : MonoBehaviour
 {
-    [SerializeField] private float Speed     =   1.0f;
-    [SerializeField] private float ResetPosX = -40.0f;
-    [SerializeField] private float DistanceX =  60.5f;
+    [SerializeField] private float speedX    =   1.0f;
+    [SerializeField] private float resetPosX = -60.5f;
+    [SerializeField] private float startPosX =  60.5f;
 
-    [SerializeField] private GameObject OtherPlatform = null;
-
-    // Use this for initialization
-    void Start()
+    protected virtual void Update()  // Called once per frame.
     {
-    }
+        if ( transform.position.x <= resetPosX )
+        {
+            transform.position = new Vector3( startPosX, transform.position.y, transform.position.z );
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if ( transform.position.x <= ResetPosX )
-        {
-            transform.position = new Vector3( ( OtherPlatform.transform.position.x + DistanceX ), transform.position.y, transform.position.z );
-        }
-        else
-        {
-            transform.Translate( Vector3.right * ( Speed * Time.deltaTime ) );
-        }
+        transform.Translate( Vector3.right * Time.deltaTime * speedX );
     }
 }
