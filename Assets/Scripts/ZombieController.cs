@@ -4,31 +4,44 @@ using UnityEngine;
 
 public class ZombieController : MonoBehaviour
 {
-    [SerializeField] private float jumpForce = 20f;
+    [SerializeField] private float     jumpForce = 20f;
+    [SerializeField] private AudioClip jumpSound = null;
 
-    private Animator  animator  = null;
-    private Rigidbody rigidBody = null;
-    private bool      jump      = false;
+    private Animator    animator    = null;
+    private Rigidbody   rigidBody   = null;
+    private AudioSource audioSource = null;
+    private bool        jump        = false;
 
     // Start is called before the first frame update.
     void Start()
     {
-        animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody>();
+        animator    = GetComponent< Animator    >();
+        rigidBody   = GetComponent< Rigidbody   >();
+        audioSource = GetComponent< AudioSource >();
     }
 
     // Update is called once per frame.
     void Update()
     {
-        if ( ( animator  != null ) &&
-             ( rigidBody != null ) )
+        if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
         {
-            if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
+            if ( animator != null )
             {
                 animator.Play( "Jump" );
-                rigidBody.useGravity = true;
-                jump = true;
             }
+
+            if ( ( audioSource != null ) &&
+                 ( jumpSound   != null ) )
+            {
+                audioSource.PlayOneShot( jumpSound );
+            }
+
+            if ( rigidBody != null )
+            {
+                rigidBody.useGravity = true;
+            }
+
+            jump = true;
         }
     }
 
@@ -39,8 +52,11 @@ public class ZombieController : MonoBehaviour
         {
             jump = false;
 
-            rigidBody.velocity = new Vector3( 0, 0, 0 );
-            rigidBody.AddForce( 0, jumpForce, 0, ForceMode.Impulse );
+            if ( rigidBody != null )
+            {
+                rigidBody.velocity = new Vector3( 0, 0, 0 );
+                rigidBody.AddForce( 0, jumpForce, 0, ForceMode.Impulse );
+            }
         }
     }
 }
