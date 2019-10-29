@@ -1730,12 +1730,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817991260}
   m_Mesh: {fileID: 4300538, guid: 5d55a2dea1a773a40aadbea8373b080f, type: 3}
---- !u!1 &856450180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1162632585605854, guid: 7faa1f8a319cc584fa41ae3a8206b1e9,
-    type: 3}
-  m_PrefabInstance: {fileID: 195755751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &857622960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,11 +4039,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114114563863504560, guid: 7faa1f8a319cc584fa41ae3a8206b1e9,
-        type: 3}
-      propertyPath: OtherPlatform
-      value: 
-      objectReference: {fileID: 856450180}
+    - target: {fileID: 4710513590745660, guid: 7faa1f8a319cc584fa41ae3a8206b1e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710513590745660, guid: 7faa1f8a319cc584fa41ae3a8206b1e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710513590745660, guid: 7faa1f8a319cc584fa41ae3a8206b1e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7faa1f8a319cc584fa41ae3a8206b1e9, type: 3}
 --- !u!1 &2081436972
@@ -4500,9 +4501,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1212496295, guid: 756f1ac38b73af442a4fc7c8c5862c67, type: 3}
-      propertyPath: jumpSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 432dc127b9a3c064882f717943420ebc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 756f1ac38b73af442a4fc7c8c5862c67, type: 3}

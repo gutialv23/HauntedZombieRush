@@ -30,19 +30,6 @@ CapsuleCollider:
   m_Height: 1.31
   m_Direction: 1
   m_Center: {x: 0, y: 0.59, z: 0}
---- !u!114 &1212496295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358910469546366991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1229353546c1a140b3d44a0b73707a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 10
 --- !u!82 &6118161102089568994
 AudioSource:
   m_ObjectHideFlags: 0
@@ -139,6 +126,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1212496295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358910469546366991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1229353546c1a140b3d44a0b73707a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 10
+  jumpSound: {fileID: 8300000, guid: 432dc127b9a3c064882f717943420ebc, type: 3}
+  deathSound: {fileID: 8300000, guid: f4fa13f4171504e4ba5d909a6763768c, type: 3}
 --- !u!1001 &6754504786343198982
 PrefabInstance:
   m_ObjectHideFlags: 0
