@@ -36,25 +36,33 @@ public class ZombieController : MonoBehaviour
     // Update is called once per frame.
     void Update()
     {
-        if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
+        if ( !GameManager.instance.GameOver )
         {
-            if ( animator != null )
+            if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
             {
-                animator.Play( "Jump" );
-            }
+                if ( !GameManager.instance.GameStarted )
+                {
+                    GameManager.instance.PlayerStarted();
+                }
 
-            if ( ( audioSource != null ) &&
-                 ( jumpSound   != null ) )
-            {
-                audioSource.PlayOneShot( jumpSound );
-            }
+                if ( animator != null )
+                {
+                    animator.Play( "Jump" );
+                }
 
-            if ( rigidBody != null )
-            {
-                rigidBody.useGravity = true;
-            }
+                if ( ( audioSource != null ) &&
+                     ( jumpSound   != null ) )
+                {
+                    audioSource.PlayOneShot( jumpSound );
+                }
 
-            jump = true;
+                if ( rigidBody != null )
+                {
+                    rigidBody.useGravity = true;
+                }
+
+                jump = true;
+            }
         }
     }
 
@@ -90,6 +98,8 @@ public class ZombieController : MonoBehaviour
             {
                 audioSource.PlayOneShot( deathSound );
             }
+
+            GameManager.instance.PlayerCollided();
         }
     }
 }

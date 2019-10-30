@@ -8,11 +8,14 @@ public class PlatformMovement : MonoBehaviour
 
     protected virtual void Update()  // Called once per frame.
     {
-        if ( transform.position.x <= resetPosX )
+        if ( !GameManager.instance.GameOver )
         {
-            transform.position = new Vector3( startPosX, transform.position.y, transform.position.z );
-        }
+            if ( transform.position.x <= resetPosX )
+            {
+                transform.position = new Vector3( startPosX, transform.position.y, transform.position.z );
+            }
 
-        transform.Translate( Vector3.right * Time.deltaTime * speedX );
+            transform.Translate( Vector3.right * Time.deltaTime * speedX );
+        }
     }
 }

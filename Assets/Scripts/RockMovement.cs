@@ -16,7 +16,10 @@ public class RockMovement : PlatformMovement
 
     protected override void Update()  // Called once per frame.
     {
-        base.Update();
+        if ( GameManager.instance.GameStarted )
+        {
+            base.Update();
+        }
     }
 
     IEnumerator MoveUpDown()
