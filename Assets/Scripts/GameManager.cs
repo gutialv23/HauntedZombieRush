@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    [SerializeField] private GameObject mainMenu = null;
+
     private bool gameOver    = false;
     private bool gameStarted = false;
+    private bool gameActive  = false;
 
     public bool GameOver
     {
@@ -17,6 +21,11 @@ public class GameManager : MonoBehaviour
     public bool GameStarted
     {
         get { return gameStarted; }
+    }
+
+    public bool GameActive
+    {
+        get { return gameActive; }
     }
 
     // Awake is called before Start function and even if the component is not enabled.
@@ -32,19 +41,11 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad( gameObject );  // Avoid destroying and creating the GameManager between scenes.
+
+        Assert.IsNotNull( mainMenu );
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // Events.
 
     public void PlayerCollided()
     {
@@ -54,5 +55,15 @@ public class GameManager : MonoBehaviour
     public void PlayerStarted()
     {
         gameStarted = true;
+    }
+
+    public void PlayerActivated()
+    {
+        if ( mainMenu != null )
+        {
+            mainMenu.SetActive( false );
+        }
+
+        gameActive = true;
     }
 }

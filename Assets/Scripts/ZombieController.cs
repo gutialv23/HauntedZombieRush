@@ -36,7 +36,8 @@ public class ZombieController : MonoBehaviour
     // Update is called once per frame.
     void Update()
     {
-        if ( !GameManager.instance.GameOver )
+        if (  GameManager.instance.GameActive &&
+             !GameManager.instance.GameOver   )
         {
             if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
             {

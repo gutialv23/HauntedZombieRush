@@ -8,7 +8,8 @@ public class PlatformMovement : MonoBehaviour
 
     protected virtual void Update()  // Called once per frame.
     {
-        if ( !GameManager.instance.GameOver )
+        if (  GameManager.instance.GameActive &&
+             !GameManager.instance.GameOver   )
         {
             if ( transform.position.x <= resetPosX )
             {
