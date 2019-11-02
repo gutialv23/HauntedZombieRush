@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 
 public class ZombieController : MonoBehaviour
 {
+    [SerializeField] private float     topLimit   = 10f;
     [SerializeField] private float     jumpForce  = 20f;
     [SerializeField] private AudioClip jumpSound  = null;
     [SerializeField] private AudioClip deathSound = null;
@@ -39,30 +40,33 @@ public class ZombieController : MonoBehaviour
         if (  GameManager.instance.GameActive &&
              !GameManager.instance.GameOver   )
         {
-            if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
+            if ( transform.position.y < topLimit )
             {
-                if ( !GameManager.instance.GameStarted )
+                if ( Input.GetButtonDown( "Jump" ) ) // Jump button is set in "Project Settings -> Input".
                 {
-                    GameManager.instance.PlayerStarted();
-                }
+                    if ( !GameManager.instance.GameStarted )
+                    {
+                        GameManager.instance.PlayerStarted();
+                    }
 
-                if ( animator != null )
-                {
-                    animator.Play( "Jump" );
-                }
+                    if ( animator != null )
+                    {
+                        animator.Play( "Jump" );
+                    }
 
-                if ( ( audioSource != null ) &&
-                     ( jumpSound   != null ) )
-                {
-                    audioSource.PlayOneShot( jumpSound );
-                }
+                    if ( ( audioSource != null ) &&
+                         ( jumpSound   != null ) )
+                    {
+                        audioSource.PlayOneShot( jumpSound );
+                    }
 
-                if ( rigidBody != null )
-                {
-                    rigidBody.useGravity = true;
-                }
+                    if ( rigidBody != null )
+                    {
+                        rigidBody.useGravity = true;
+                    }
 
-                jump = true;
+                    jump = true;
+                }
             }
         }
     }
@@ -90,7 +94,7 @@ public class ZombieController : MonoBehaviour
             if ( rigidBody != null )
             {
                 rigidBody.velocity = new Vector3( 0, 0, 0 );
-                rigidBody.AddForce( -5, 5, 0, ForceMode.Impulse );
+                rigidBody.AddForce( 0, 5, 0, ForceMode.Impulse );
                 rigidBody.detectCollisions = false;
             }
 
@@ -98,6 +102,11 @@ public class ZombieController : MonoBehaviour
                  ( deathSound  != null ) )
             {
                 audioSource.PlayOneShot( deathSound );
+            }
+
+            if ( animator != null )
+            {
+                animator.StopPlayback();
             }
 
             GameManager.instance.PlayerCollided();
