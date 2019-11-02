@@ -15,6 +15,9 @@ public class ZombieController : MonoBehaviour
     private AudioSource audioSource = null;
     private bool        jump        = false;
 
+    private Vector3    initialPosition;
+    private Quaternion initialRotation;
+
     // Awake is called before Start function and even if the component is not enabled.
     void Awake()
     {
@@ -32,6 +35,9 @@ public class ZombieController : MonoBehaviour
 
         Assert.IsNotNull( jumpSound  , "Jump Sound not found"            );
         Assert.IsNotNull( deathSound , "Death Sound not found"           );
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
     // Update is called once per frame.
@@ -110,6 +116,26 @@ public class ZombieController : MonoBehaviour
             }
 
             GameManager.instance.PlayerCollided();
+        }
+    }
+
+    // Events.
+
+    public void Init()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+
+        if ( rigidBody != null )
+        {
+            rigidBody.velocity         = new Vector3( 0, 0, 0 );
+            rigidBody.useGravity       = false;
+            rigidBody.detectCollisions = true;
+        }
+
+        if ( animator != null )
+        {
+            animator.Play( "Idle" );
         }
     }
 }

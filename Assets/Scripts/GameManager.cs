@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [SerializeField] private GameObject mainMenu = null;
+    [SerializeField] private GameObject gameOverMenu = null;
+
+    [SerializeField] private GameObject player = null;
+    [SerializeField] private GameObject rock1  = null;
+    [SerializeField] private GameObject rock2  = null;
 
     private bool gameOver    = false;
     private bool gameStarted = false;
@@ -42,28 +47,77 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad( gameObject );  // Avoid destroying and creating the GameManager between scenes.
 
-        Assert.IsNotNull( mainMenu );
+        Assert.IsNotNull( mainMenu     );
+        Assert.IsNotNull( gameOverMenu );
+
+        Assert.IsNotNull( player );
+        Assert.IsNotNull( rock1  );
+        Assert.IsNotNull( rock2  );
+    }
+
+    // Start is called before the first frame update.
+    void Start()
+    {
+        Init();
     }
 
     // Events.
 
+    public void InitGameState()
+    {
+        gameOver    = false;
+        gameStarted = false;
+        gameActive  = false;
+
+        if ( player != null )
+        {
+            ZombieController zc = player.GetComponent<ZombieController>();
+
+            if ( zc != null ) zc.Init();
+        }
+
+        if ( rock1 != null )
+        {
+            RockMovement rm = rock1.GetComponent<RockMovement>();
+
+            if ( rm != null ) rm.Init();
+        }
+
+        if ( rock2 != null )
+        {
+            RockMovement rm = rock2.GetComponent<RockMovement>();
+
+            if ( rm != null ) rm.Init();
+        }
+    }
+
+    public void Init()
+    {
+        InitGameState();
+
+        if ( gameOverMenu != null ) gameOverMenu.SetActive( false );
+        if (     mainMenu != null )     mainMenu.SetActive( true  );
+    }
+
+    public void PlayerActivated()
+    {
+        InitGameState();
+
+        if (     mainMenu != null )     mainMenu.SetActive( false );
+        if ( gameOverMenu != null ) gameOverMenu.SetActive( false );
+
+        gameActive = true;
+    }
+
     public void PlayerCollided()
     {
+        if ( gameOverMenu != null ) gameOverMenu.SetActive( true  );
+
         gameOver = true;
     }
 
     public void PlayerStarted()
     {
         gameStarted = true;
-    }
-
-    public void PlayerActivated()
-    {
-        if ( mainMenu != null )
-        {
-            mainMenu.SetActive( false );
-        }
-
-        gameActive = true;
     }
 }

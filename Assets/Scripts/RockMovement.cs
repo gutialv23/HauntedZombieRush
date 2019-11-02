@@ -9,8 +9,12 @@ public class RockMovement : PlatformMovement
     [ SerializeField ] private float speedY     =  1.0f;
     [ SerializeField ] private float waitTime   =  0.5f;
 
+    private Vector3 initialPosition;
+
     void Start()  // Called before the first frame update.
     {
+        initialPosition = transform.position;
+
         StartCoroutine( MoveUpDown() );
     }
 
@@ -37,5 +41,12 @@ public class RockMovement : PlatformMovement
 
             yield return ( ( wait ) ? new WaitForSeconds( waitTime ) : null );
         }
+    }
+
+    // Events.
+
+    public void Init()
+    {
+        transform.position = initialPosition;
     }
 }
