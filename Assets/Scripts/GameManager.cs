@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    [SerializeField] private GameObject mainMenu = null;
+    [SerializeField] private GameObject mainMenu     = null;
     [SerializeField] private GameObject gameOverMenu = null;
+    [SerializeField] private GameObject coinMenu     = null;
 
     [SerializeField] private GameObject player = null;
     [SerializeField] private GameObject rock1  = null;
@@ -19,7 +21,7 @@ public class GameManager : MonoBehaviour
     private bool gameStarted = false;
     private bool gameActive  = false;
 
-    private int  coins = 0;
+    private int  totalCoins = 0;
 
     public bool GameOver
     {
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
 
         Assert.IsNotNull( mainMenu     );
         Assert.IsNotNull( gameOverMenu );
+        Assert.IsNotNull( coinMenu     );
 
         Assert.IsNotNull( player );
         Assert.IsNotNull( rock1  );
@@ -73,7 +76,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
         gameActive  = false;
 
-        coins = 0;
+        totalCoins = 0;
 
         if ( player != null )
         {
@@ -122,7 +125,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerCollided()
     {
-        if ( gameOverMenu != null ) gameOverMenu.SetActive( true  );
+        Text coinText = coinMenu.GetComponent<Text>();
+
+        if ( coinText != null ) coinText.text = "Coins: " + totalCoins;
+
+        if ( gameOverMenu != null ) gameOverMenu.SetActive( true );
 
         gameOver = true;
     }
@@ -134,6 +141,6 @@ public class GameManager : MonoBehaviour
 
     public void CoinCollected()
     {
-        ++coins;
+        ++totalCoins;
     }
 }
