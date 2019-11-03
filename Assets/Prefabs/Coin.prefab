@@ -26,14 +26,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedX: -2
-  resetPosX: -7.5
-  startPosX: 7.5
+  spawnPosX: -7.5
+  spawnDistX: 15
   randomSpawnY: 1
   topPosY: 9
   bottomPosY: -1
   moveUpDown: 0
   speed: 1
   waitTime: 0.5
+  other: {fileID: 0}
 --- !u!1001 &3335437629654939736
 PrefabInstance:
   m_ObjectHideFlags: 0

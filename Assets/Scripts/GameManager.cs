@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player = null;
     [SerializeField] private GameObject rock1  = null;
     [SerializeField] private GameObject rock2  = null;
+    [SerializeField] private GameObject coin   = null;
 
     private bool gameOver    = false;
     private bool gameStarted = false;
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         Assert.IsNotNull( player );
         Assert.IsNotNull( rock1  );
         Assert.IsNotNull( rock2  );
+        Assert.IsNotNull( coin   );
     }
 
     // Start is called before the first frame update.
@@ -77,28 +79,33 @@ public class GameManager : MonoBehaviour
         {
             ZombieController zc = player.GetComponent<ZombieController>();
 
-            if ( zc != null ) zc.Init();
+            if ( zc != null ) zc.Respawn();
         }
 
         if ( rock1 != null )
         {
             RockMovement rm = rock1.GetComponent<RockMovement>();
 
-            if ( rm != null ) rm.Init();
+            if ( rm != null ) rm.Respawn();
         }
 
         if ( rock2 != null )
         {
             RockMovement rm = rock2.GetComponent<RockMovement>();
 
-            if ( rm != null ) rm.Init();
+            if ( rm != null ) rm.Respawn();
+        }
+
+        if ( coin != null )
+        {
+            RockMovement rm = coin.GetComponent<RockMovement>();
+
+            if ( rm != null ) rm.Respawn();
         }
     }
 
     public void Init()
     {
-        InitGameState();
-
         if ( gameOverMenu != null ) gameOverMenu.SetActive( false );
         if (     mainMenu != null )     mainMenu.SetActive( true  );
     }

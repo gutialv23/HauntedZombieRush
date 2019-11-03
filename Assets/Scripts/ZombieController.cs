@@ -25,6 +25,9 @@ public class ZombieController : MonoBehaviour
         animator    = GetComponent< Animator    >();
         rigidBody   = GetComponent< Rigidbody   >();
         audioSource = GetComponent< AudioSource >();
+
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
     // Start is called before the first frame update.
@@ -38,8 +41,7 @@ public class ZombieController : MonoBehaviour
         Assert.IsNotNull( deathSound , "Death Sound not found"           );
         Assert.IsNotNull( coinSound  , "Coin Sound not found"            );
 
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
+        Respawn();
     }
 
     // Update is called once per frame.
@@ -125,7 +127,7 @@ public class ZombieController : MonoBehaviour
 
             if ( rm != null )
             {
-                rm.Init();
+                rm.Respawn();
             }
             else
             {
@@ -144,7 +146,7 @@ public class ZombieController : MonoBehaviour
 
     // Events.
 
-    public void Init()
+    public void Respawn()
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
@@ -152,6 +154,7 @@ public class ZombieController : MonoBehaviour
         if ( rigidBody != null )
         {
             rigidBody.velocity         = new Vector3( 0, 0, 0 );
+            rigidBody.angularVelocity  = new Vector3( 0, 0, 0 );
             rigidBody.useGravity       = false;
             rigidBody.detectCollisions = true;
         }

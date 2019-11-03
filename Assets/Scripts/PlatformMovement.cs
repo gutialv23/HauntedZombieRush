@@ -3,8 +3,8 @@
 public class PlatformMovement : MonoBehaviour
 {
     [SerializeField] private   float       speedX =   1.0f;
-    [SerializeField] private   float    resetPosX = -60.5f;
-    [SerializeField] private   float    startPosX =  60.5f;
+    [SerializeField] private   float    spawnPosX = -60.5f;
+    [SerializeField] private   float   spawnDistX = 121.0f;
 
     [SerializeField] private   bool  randomSpawnY =  false;
     [SerializeField] protected float      topPosY =   1.0f;
@@ -15,14 +15,21 @@ public class PlatformMovement : MonoBehaviour
         if (  GameManager.instance.GameActive &&
              !GameManager.instance.GameOver   )
         {
-            if ( transform.position.x <= resetPosX )
+            if ( transform.position.x <= spawnPosX )
             {
-                float startPosY = ( randomSpawnY ? Random.Range( bottomPosY, topPosY ) : transform.position.y );
-
-                transform.position = new Vector3( startPosX, startPosY, transform.position.z );
+                Respawn();
             }
 
             transform.Translate( Vector3.right * Time.deltaTime * speedX );
         }
+    }
+
+    // Events.
+
+    public void Respawn()
+    {
+        float spawnPosY = ( randomSpawnY ? Random.Range( bottomPosY, topPosY ) : transform.position.y );
+
+        transform.position = new Vector3( transform.position.x + spawnDistX, spawnPosY, transform.position.z );
     }
 }
