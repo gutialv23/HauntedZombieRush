@@ -9,6 +9,7 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private float     jumpForce  = 20f;
     [SerializeField] private AudioClip jumpSound  = null;
     [SerializeField] private AudioClip deathSound = null;
+    [SerializeField] private AudioClip coinSound  = null;
 
     private Animator    animator    = null;
     private Rigidbody   rigidBody   = null;
@@ -35,6 +36,7 @@ public class ZombieController : MonoBehaviour
 
         Assert.IsNotNull( jumpSound  , "Jump Sound not found"            );
         Assert.IsNotNull( deathSound , "Death Sound not found"           );
+        Assert.IsNotNull( coinSound  , "Coin Sound not found"            );
 
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -110,12 +112,33 @@ public class ZombieController : MonoBehaviour
                 audioSource.PlayOneShot( deathSound );
             }
 
-            if ( animator != null )
+            GameManager.instance.PlayerCollided();
+        }
+    }
+
+    // Destroy everything that enters the trigger
+    void OnTriggerEnter( Collider collider )
+    {
+        if ( collider.gameObject.tag == "Coin" )
+        {
+            RockMovement rm = collider.gameObject.GetComponent<RockMovement>();
+
+            if ( rm != null )
             {
-                animator.StopPlayback();
+                rm.Init();
+            }
+            else
+            {
+                Destroy( collider.gameObject );
             }
 
-            GameManager.instance.PlayerCollided();
+            if ( ( audioSource != null ) &&
+                 ( coinSound   != null ) )
+            {
+                audioSource.PlayOneShot( coinSound );
+            }
+
+            GameManager.instance.CoinCollected();
         }
     }
 
@@ -131,11 +154,6 @@ public class ZombieController : MonoBehaviour
             rigidBody.velocity         = new Vector3( 0, 0, 0 );
             rigidBody.useGravity       = false;
             rigidBody.detectCollisions = true;
-        }
-
-        if ( animator != null )
-        {
-            animator.Play( "Idle" );
         }
     }
 }

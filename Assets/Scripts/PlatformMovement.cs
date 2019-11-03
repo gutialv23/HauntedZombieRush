@@ -2,9 +2,13 @@
 
 public class PlatformMovement : MonoBehaviour
 {
-    [SerializeField] private float speedX    =   1.0f;
-    [SerializeField] private float resetPosX = -60.5f;
-    [SerializeField] private float startPosX =  60.5f;
+    [SerializeField] private   float       speedX =   1.0f;
+    [SerializeField] private   float    resetPosX = -60.5f;
+    [SerializeField] private   float    startPosX =  60.5f;
+
+    [SerializeField] private   bool  randomSpawnY =  false;
+    [SerializeField] protected float      topPosY =   1.0f;
+    [SerializeField] protected float   bottomPosY =  -1.0f;
 
     protected virtual void Update()  // Called once per frame.
     {
@@ -13,7 +17,9 @@ public class PlatformMovement : MonoBehaviour
         {
             if ( transform.position.x <= resetPosX )
             {
-                transform.position = new Vector3( startPosX, transform.position.y, transform.position.z );
+                float startPosY = ( randomSpawnY ? Random.Range( bottomPosY, topPosY ) : transform.position.y );
+
+                transform.position = new Vector3( startPosX, startPosY, transform.position.z );
             }
 
             transform.Translate( Vector3.right * Time.deltaTime * speedX );

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private bool gameStarted = false;
     private bool gameActive  = false;
 
+    private int  coins = 0;
+
     public bool GameOver
     {
         get { return gameOver; }
@@ -69,6 +71,8 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
         gameActive  = false;
 
+        coins = 0;
+
         if ( player != null )
         {
             ZombieController zc = player.GetComponent<ZombieController>();
@@ -119,5 +123,10 @@ public class GameManager : MonoBehaviour
     public void PlayerStarted()
     {
         gameStarted = true;
+    }
+
+    public void CoinCollected()
+    {
+        ++coins;
     }
 }

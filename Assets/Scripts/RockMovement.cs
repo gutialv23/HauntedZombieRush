@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class RockMovement : PlatformMovement
 {
-    [ SerializeField ] private float    topPosY =  1.0f;
-    [ SerializeField ] private float bottomPosY = -1.0f;
-    [ SerializeField ] private float speedY     =  1.0f;
-    [ SerializeField ] private float waitTime   =  0.5f;
+    [SerializeField] private bool  moveUpDown = true;
+    [SerializeField] private float speed      = 1.0f;
+    [SerializeField] private float waitTime   = 0.5f;
 
     private Vector3 initialPosition;
 
@@ -15,7 +14,10 @@ public class RockMovement : PlatformMovement
     {
         initialPosition = transform.position;
 
-        StartCoroutine( MoveUpDown() );
+        if ( moveUpDown )
+        {
+            StartCoroutine( MoveUpDown() );
+        }
     }
 
     protected override void Update()  // Called once per frame.
@@ -32,7 +34,7 @@ public class RockMovement : PlatformMovement
 
         while ( true )
         {
-            transform.localPosition += ( direction * Time.deltaTime * speedY );
+            transform.localPosition += ( direction * Time.deltaTime * speed );
 
             bool wait = false;
 
