@@ -79,28 +79,28 @@ public class GameManager : MonoBehaviour
         {
             ZombieController zc = player.GetComponent<ZombieController>();
 
-            if ( zc != null ) zc.Respawn();
+            if ( zc != null ) zc.Init();
         }
 
         if ( rock1 != null )
         {
             RockMovement rm = rock1.GetComponent<RockMovement>();
 
-            if ( rm != null ) rm.Respawn();
+            if ( rm != null ) rm.Init();
         }
 
         if ( rock2 != null )
         {
             RockMovement rm = rock2.GetComponent<RockMovement>();
 
-            if ( rm != null ) rm.Respawn();
+            if ( rm != null ) rm.Init();
         }
 
         if ( coin != null )
         {
             RockMovement rm = coin.GetComponent<RockMovement>();
 
-            if ( rm != null ) rm.Respawn();
+            if ( rm != null ) rm.Init();
         }
     }
 

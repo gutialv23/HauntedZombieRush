@@ -41,7 +41,7 @@ public class ZombieController : MonoBehaviour
         Assert.IsNotNull( deathSound , "Death Sound not found"           );
         Assert.IsNotNull( coinSound  , "Coin Sound not found"            );
 
-        Respawn();
+        Init();
     }
 
     // Update is called once per frame.
@@ -146,7 +146,7 @@ public class ZombieController : MonoBehaviour
 
     // Events.
 
-    public void Respawn()
+    public void Init()
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;

@@ -1,16 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RockMovement : PlatformMovement
 {
-    [SerializeField] private bool  moveUpDown = true;
-    [SerializeField] private float speed      = 1.0f;
-    [SerializeField] private float waitTime   = 0.5f;
+    [SerializeField] private bool  moveUpDown   =  true;
+    [SerializeField] private float linearSpeed  =  1.0f;
+    [SerializeField] private float angularSpeed = 50.0f;
+    [SerializeField] private float waitTime     =  0.5f;
 
-    [SerializeField] private GameObject other = null;
-
-    void Start()  // Called before the first frame update.
+    // Start is called before the first frame update.
+    void Start()
     {
         if ( moveUpDown )
         {
@@ -24,6 +23,8 @@ public class RockMovement : PlatformMovement
         {
             base.Update();
         }
+
+        transform.Rotate( 0, ( Time.deltaTime * angularSpeed ), 0, Space.Self );
     }
 
     IEnumerator MoveUpDown()
@@ -32,7 +33,7 @@ public class RockMovement : PlatformMovement
 
         while ( true )
         {
-            transform.localPosition += ( direction * Time.deltaTime * speed );
+            transform.localPosition += ( direction * Time.deltaTime * linearSpeed );
 
             bool wait = false;
 

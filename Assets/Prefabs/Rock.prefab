@@ -43,14 +43,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedX: 2
   spawnPosX: -6
+  startPosX: 60.5
   spawnDistX: 12
   randomSpawnY: 1
   topPosY: 9
   bottomPosY: -1
   moveUpDown: 1
-  speed: 2
+  linearSpeed: 1
+  rotate: 1
+  angularSpeed: 50
   waitTime: 0.5
-  other: {fileID: 0}
 --- !u!1001 &933360230736837038
 PrefabInstance:
   m_ObjectHideFlags: 0

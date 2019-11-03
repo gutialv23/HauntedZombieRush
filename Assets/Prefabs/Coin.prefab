@@ -25,16 +25,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b7ec07cd15d724a876ed00cb7f5452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: -2
+  speedX: 2
   spawnPosX: -7.5
+  startPosX: 7.5
   spawnDistX: 15
   randomSpawnY: 1
   topPosY: 9
   bottomPosY: -1
   moveUpDown: 0
-  speed: 1
+  linearSpeed: 1
+  rotate: 0
+  angularSpeed: 1
   waitTime: 0.5
-  other: {fileID: 0}
 --- !u!1001 &3335437629654939736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 30162118d205f6540871adfb7083c096, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.75
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 30162118d205f6540871adfb7083c096, type: 3}
       propertyPath: m_LocalPosition.y
